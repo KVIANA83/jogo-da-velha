@@ -1,0 +1,27 @@
+.controle {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 60px;
+}
+
+.controle button {
+  font-size: 18px;
+  font-weight: 600;
+  color: #800000;
+  background-color: transparent;
+  border: 1px solid #800000;
+  border-radius: 25px;
+  margin: 5px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: .2s;
+  width: 150px;
+}
+
+.controle button:hover {
+  color: #000;
+  border: none;
+  background-image: linear-gradient(to right, #800000, #ef8f8f);
+}

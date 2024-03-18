@@ -1,0 +1,96 @@
+/* Estilização Geral */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #000;
+  display: block;
+}
+
+.container {
+  height: 100vh;
+}
+
+.controles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 60px;
+}
+
+.controles button {
+  font-size: 18px;
+  font-weight: 600;
+  color: #800000;
+  background-color: transparent;
+  border: 1px solid #800000;
+  border-radius: 25px;
+  margin: 5px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: .2s;
+  width: 150px;
+}
+
+.controles button:hover {
+  color: #000;
+  border: none;
+  background-image: linear-gradient(to right, #800000, #ef8f8f);
+}
+
+
+/* Estilização de Texto */
+.titulo {
+  font-size: 38px;
+  background: linear-gradient(to right, #800000, #ef8f8f);
+  -webkit-background-clip: text;
+  color: transparent;
+  text-align: center;
+}
+
+
+/* Estilização do Rodapé */
+
+footer {
+  padding: 30px 4%;
+  box-shadow: 0 0 40px 0 #ea5b5b50;
+}
+
+footer .btn-social {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.btn-social button {
+  width: 60px;
+  height: 60px;
+  font-size: 22px;
+  cursor: pointer;
+  margin: 0 5px;
+  transition: .2s;
+  border: 2px solid #800000;
+  border-radius: 50px;
+  background-color: transparent;
+  color: #800000;
+  justify-content: space-between;
+}
+
+.btn-social button:hover {
+  color: #000;
+  border: none;
+  background-image: linear-gradient(to right, #800000, #ef8f8f);
+}
+
+.btn-social a {
+  text-decoration: none;
+}

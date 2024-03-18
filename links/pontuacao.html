@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="../styles/pontuacao.css"/>
+  
+  <!-- BOOTSTRAP ICONS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  
+  <title>Pontuação</title>
+</head>
+<body>
+  
+  <div class="container">
+    <!-- Título -->
+    <h1 class="titulo">Pontuação</h1>
+    
+    <!-- Painel de pontuação -->
+    <div class="pontuacao-container">
+      
+      <!-- Painel de pontos Jogador X -->
+      <div class="jogador-x">
+        <!-- Subtítulo -->
+        <h2 class="subtitulo">Jogador X</h2>
+        <p>Pontuação: <span id="pontuacaoX">0</span></p>
+      </div> <!-- Fim div jogador-x -->
+      
+      <!-- Painel de pontos Jogador O -->
+      <div class="jogador-o">
+        <!-- Subtítulo -->
+        <h2 class="subtitulo">Jogador O</h2>
+        <p>Pontuação: <span id="pontuacaoO">0</span></p>
+      </div> <!-- Fim div jogador O -->
+      
+      <!-- Painel de pontos empate dos jogadores X e O -->
+      <div class="empates">
+        <!-- Subtítulo -->
+        <h2 class="subtitulo">Empates</h2>
+        <!-- Pontuação total salva -->
+        <p>Total: <span id="empates">0</span></p>
+      </div> <!-- Fim div empates -->
+    </div> <!-- Fim div pontuacao-container -->
+    
+    <div class="controles">
+      <a href="../links/index.html">
+        <button>Voltar</button>  
+      </a>
+      <button id="resetPontuacao">Reset</button>
+    </div>
+  </div> <!-- Fim div container -->
+  
+  <!-- Rodapé --> 
+  <footer>
+    <!-- Ícones de mídias sociais -->
+    <div class="btn-social">
+      <!-- INSTAGRAM -->
+      <a href="https://instagram.com/karinekviana?igshid=OGQ5ZDc2ODk2ZA==">
+        <button><i class="bi bi-instagram"></i></button>
+      </a>
+      <!-- GITHUB -->
+      <a href="https://github.com/KVIANA83">
+        <button><i class="bi bi-github"></i></button>
+      </a>
+      <!-- LINKEDIN -->
+      <a href="https://www.linkedin.com/in/karine-viana-caldas-aa03a2194">
+        <button><i class="bi bi-linkedin"></i></button>
+      </a>
+    </div> <!-- Fim div btn-social -->
+  </footer>
+  
+  <!-- JAVASCRIPT -->
+  <script src="../scripts/script.js"></script>
+
+</body>
+</html>
