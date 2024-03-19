@@ -153,3 +153,65 @@ document.addEventListener('DOMContentLoaded', function() {
   // Adicionar listener de evento ao botão de reset
   resetButton.addEventListener('click', resetGame);
 });
+
+// Pagina Main
+document.addEventListener('DOMContentLoaded', function() {
+  const cells = document.querySelectorAll('.cell');
+  const status = document.querySelector('.status');
+  const resetButton = document.getElementById('resetGame');
+
+  let currentPlayer = 'X';
+  let gameStatus = ['','','','','','','','',''];
+
+  // Função para verificar o estado do jogo
+  function checkGameStatus() {
+    const winningConditions = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8], // Linhas
+      [0, 3, 6], [1, 4, 7], [2, 5, 8], // Colunas
+      [0, 4, 8], [2, 4, 6] // Diagonais
+    ];
+
+    for (let condition of winningConditions) {
+      const [a, b, c] = condition;
+      if (gameStatus[a] && gameStatus[a] === gameStatus[b] && gameStatus[a] === gameStatus[c]) {
+        status.textContent = `O jogador ${gameStatus[a]} venceu!`;
+        return;
+      }
+    }
+
+    if (!gameStatus.includes('')) {
+      status.textContent = 'Empate!';
+    }
+  }
+
+  // Função para lidar com o clique em uma célula
+  function cellClickHandler(event) {
+    const cellIndex = event.target.dataset.index;
+
+    if (gameStatus[cellIndex] === '' && !status.textContent.includes('venceu')) {
+      gameStatus[cellIndex] = currentPlayer;
+      event.target.textContent = currentPlayer;
+      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+      status.textContent = `É a vez do jogador ${currentPlayer}`;
+      checkGameStatus();
+    }
+  }
+
+  // Função para reiniciar o jogo
+  function resetGame() {
+    gameStatus = ['','','','','','','','',''];
+    cells.forEach(cell => {
+      cell.textContent = '';
+    });
+    status.textContent = `É a vez do jogador X`;
+    currentPlayer = 'X';
+  }
+
+  // Adicionar listeners de evento às células
+  cells.forEach(cell => {
+    cell.addEventListener('click', cellClickHandler);
+  });
+
+  // Adicionar listener de evento ao botão de reset
+  resetButton.addEventListener('click', resetGame);
+});
