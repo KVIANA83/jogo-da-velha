@@ -1,13 +1,5 @@
-// Página Instruções 
-// Redirecionar para a página anterior ao clicar no botão "Voltar"
-document.querySelector('.btn-voltar button').addEventListener('click', function() {
-  history.back();
-});
-
-// Página escolher Nível do jogo e salvar a escolha
-// Função para carregar o nível salvo, se existir
-// Função para carregar a pontuação salva, se existir
-window.onload = function() {
+// Função comum para carregar pontuações e nível
+function carregarDados() {
   // Carregar nível salvo
   let savedLevel = localStorage.getItem('nivel');
   if (savedLevel) {
@@ -24,7 +16,7 @@ window.onload = function() {
   let pontuacaoX = localStorage.getItem('pontuacaoX');
   let pontuacaoO = localStorage.getItem('pontuacaoO');
   let empates = localStorage.getItem('empates');
-  
+
   if (pontuacaoX !== null) {
     document.getElementById('pontuacaoX').textContent = pontuacaoX;
   }
@@ -34,14 +26,41 @@ window.onload = function() {
   if (empates !== null) {
     document.getElementById('empates').textContent = empates;
   }
-};
+}
+
+// Página Instruções
+// Redirecionar para a página anterior ao clicar no botão "Voltar"
+document.querySelector('.btn-voltar button').addEventListener('click', function() {
+  history.back();
+});
+
+// Página escolher Nível do jogo e salvar a escolha
+document.addEventListener('DOMContentLoaded', function() {
+  carregarDados();
+
+  document.querySelectorAll('.btn-nivel').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      let nivel = btn.getAttribute('data-nivel');
+      localStorage.setItem('nivel', nivel);
+      document.querySelectorAll('.btn-nivel').forEach(function(btn) {
+        btn.classList.remove('ativo');
+      });
+      btn.classList.add('ativo');
+    });
+  });
+
+  // Adicionar evento de clique ao botão de salvar (se necessário)
+  document.getElementById('btnSalvar').addEventListener('click', function() {
+    alert('Nível salvo com sucesso!');
+  });
+});
 
 // Função para salvar a pontuação
 function salvarPontuacao() {
   let pontuacaoX = document.getElementById('pontuacaoX').textContent;
   let pontuacaoO = document.getElementById('pontuacaoO').textContent;
   let empates = document.getElementById('empates').textContent;
-  
+
   localStorage.setItem('pontuacaoX', pontuacaoX);
   localStorage.setItem('pontuacaoO', pontuacaoO);
   localStorage.setItem('empates', empates);
@@ -83,11 +102,6 @@ function atualizarEmpates() {
   document.getElementById('empates').textContent = empates;
   salvarPontuacao();
 }
-
-// Exemplo de uso: chame essas funções quando o jogador vencer ou houver um empate
-// atualizarPontuacaoX(); // Para atualizar a pontuação do jogador X
-// atualizarPontuacaoO(); // Para atualizar a pontuação do jogador O
-// atualizarEmpates(); // Para atualizar a pontuação de empates
 
 // Adicionando evento de clique ao botão de reset
 document.getElementById('resetPontuacao').addEventListener('click', resetarPontuacao);
@@ -146,69 +160,8 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Adicionar listeners de evento às células
-  cells.forEach(cell => {
-    cell.addEventListener('click', cellClickHandler);
-  });
-
-  // Adicionar listener de evento ao botão de reset
-  resetButton.addEventListener('click', resetGame);
-});
-
-// Pagina Main
-document.addEventListener('DOMContentLoaded', function() {
-  const cells = document.querySelectorAll('.cell');
-  const status = document.querySelector('.status');
-  const resetButton = document.getElementById('resetGame');
-
-  let currentPlayer = 'X';
-  let gameStatus = ['','','','','','','','',''];
-
-  // Função para verificar o estado do jogo
-  function checkGameStatus() {
-    const winningConditions = [
-      [0, 1, 2], [3, 4, 5], [6, 7, 8], // Linhas
-      [0, 3, 6], [1, 4, 7], [2, 5, 8], // Colunas
-      [0, 4, 8], [2, 4, 6] // Diagonais
-    ];
-
-    for (let condition of winningConditions) {
-      const [a, b, c] = condition;
-      if (gameStatus[a] && gameStatus[a] === gameStatus[b] && gameStatus[a] === gameStatus[c]) {
-        status.textContent = `O jogador ${gameStatus[a]} venceu!`;
-        return;
-      }
-    }
-
-    if (!gameStatus.includes('')) {
-      status.textContent = 'Empate!';
-    }
-  }
-
-  // Função para lidar com o clique em uma célula
-  function cellClickHandler(event) {
-    const cellIndex = event.target.dataset.index;
-
-    if (gameStatus[cellIndex] === '' && !status.textContent.includes('venceu')) {
-      gameStatus[cellIndex] = currentPlayer;
-      event.target.textContent = currentPlayer;
-      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-      status.textContent = `É a vez do jogador ${currentPlayer}`;
-      checkGameStatus();
-    }
-  }
-
-  // Função para reiniciar o jogo
-  function resetGame() {
-    gameStatus = ['','','','','','','','',''];
-    cells.forEach(cell => {
-      cell.textContent = '';
-    });
-    status.textContent = `É a vez do jogador X`;
-    currentPlayer = 'X';
-  }
-
-  // Adicionar listeners de evento às células
-  cells.forEach(cell => {
+  cells.forEach((cell, index) => {
+    cell.dataset.index = index;
     cell.addEventListener('click', cellClickHandler);
   });
 
